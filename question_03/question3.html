@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Bus route 4</title>
+    <script src="http://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js"></script> 
+    <link href="http://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css" rel="stylesheet"/>
+    <style>
+        body {margin: 0; padding: 0;}
+        #map {position: absolute; top: 0; bottom: 0; width: 100%;}
+        .map-overlay{
+            position: absolute;
+            left: 0;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+<div class="map-overlay top">
+    <button style="font-size: 2em;" onclick="move()">
+            Show bus route 4
+    </button>
+</div>
+
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiYXZhZGlqc3RlbGJsb2VtIiwiYSI6ImNremx3aGloczRoejcybnBxNjB6MnEyeXYifQ.E2uIGQDszP0uG8r_CRfb4Q'
+
+var map = new mapboxgl.Map({
+    container: 'map',
+    style:  'mapbox://styles/mapbox/streets-v11', 
+    center: [-71.031996,42.345192],
+    zoom:12,
+});
+var marker = new mapboxgl.Marker()
+    .setLngLat([-71.031996,42.345192])
+    .addTo(map);
+
+const busStops = [
+        [-71.031996,42.345192],
+        [-71.034862,42.346586],
+        [-71.048371,42.353237],
+        [-71.053253,42.354668], 
+        [-71.056228,42.357447],
+        [-71.056218,42.357470],
+        [-71.057525,42.358876],
+        [-71.057129,42.360300],  
+        [-71.057954,42.362037],
+        [-71.062198,42.364727]
+
+];
+var counter = 0;
+function move(){
+    setTimeout(()=>{
+        if (counter >= busStops.length) return;
+        marker.setLngLat(busStops[counter]);
+        counter++;
+        move();
+    }, 1000);
+};
+</script> 
+</body>
+
+
+</html>
